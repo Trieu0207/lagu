@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="container-1">
+    <form enctype="multipart/form-data">
+      <div class="mb-3 mt-3">
+        <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+        <label for="sdt" class="form-label">Số điện thoại:</label>
+        <input type="text" class="form-control" id="sdt" name="sdt" [(ngModel)] = "this.so_dien_thoai">
+      </div>
+      <div class="mb-3 mt-3">
+        <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+        <label for="ten" class="form-label">Tên người đặt:</label>
+        <input type="text" class="form-control" id="ten" name="ten"  [(ngModel)] = "this.ten">
+      </div>
+      <div class="mb-3 mt-3">
+        <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+        <label for="ngay_nhan_ban"  class="form-label">ngày nhận bàn:</label>
+        <input type="datetime-local" (input)="dateFormat($event)" class="form-control" id="ngay_nhan_ban" name="ngay_nhan_ban" [(ngModel)] = "this.ngay_nhan">
+      </div>
+
+
+      <table class="table ban">
+        <thead>
+          <tr>
+            <th>Số bàn trống ngày: {{this.ngay_nhan}}</th>
+          </tr>
+          <tr>
+            <th>Loại bàn</th>
+            <th>Số lượng</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of this.ban_trong">
+          <tr style="align-items: center;">
+            <td>{{item.loai}}</td>
+            <td>{{item.total_so_luong}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="form-check mb-3" style="padding-left: 0;">
+        <label for="dropdown" class="form-label">Chọn loại bàn:</label>
+        <select class="form-select" id="dropdown" name="loai" [(ngModel)] = "this.loai">
+          <option *ngFor="let item of this.ban_trong" value="{{item.loai}}" selected >{{item.loai}}</option>
+        </select>
+      </div>
+      <div class="mb-3 mt-3">
+        <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+        <label for="so_luong" class="form-label">Số lượng: <span class="text-danger" *ngIf="this.checkSoLuongBan() == false" >{{this.warning}}</span></label>
+        <input type="number" (input) = "changeSoLuongBan($event)" max="{{this.setMaxValue()}}" class="form-control" id="so_luong" name="so_luong"[(ngModel)] = "this.so_luong">
+      </div>
+      <div class="mb-3 mt-3">
+        <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+        <label for="sdt" class="form-label">Tổng tiền cọc: {{ this.tong_tien | currency:'VND':'symbol':'1.0-0' }}</label>
+        <input type="number" readonly class="form-control" id="tongTien" name="tongTien" [(ngModel)] = "this.tong_tien">
+      </div>
+
+      <div *ngIf="this.bill_menu != []">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Tên món</th>
+              <th>Đơn giá</th>
+              <th>Số lượng</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of bill_menu">
+            <tr style="align-items: center;">
+              <td>{{item.ten_san_pham}}</td>
+              <td><p>{{ item.don_gia | currency:'VND':'symbol':'1.0-0' }}</p></td>
+              <td>
+                <input type="number" (input)="change($event, item)" [value]="item.so_luong" min="1"/>
+              </td>
+              <td>
+                <button class="btn btn-outline-danger btn-sm" (click)="xoa(item)">Xóa</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button  type="submit" disabled  *ngIf="this.checkSubmit == false" class="btn btn-primary" (click)="submit()">Đặt bàn</button>
+      <button  type="submit"  *ngIf="this.checkSubmit == true" class="btn btn-primary" (click)="submit()">Đặt bàn</button>
+      <button style="margin-left: 2rem;" (click)="getBanTrong(this.ngay_nhan)" type="submit" class="btn btn-warning">check bàn trống</button>
+
+    </form>
+
+
+  </div>
+  <div class="container-2">
+    <div class="header-bar">
+      <div class="input-group mb-3 search-bar">
+        <input type="text" class="form-control" [(ngModel)]="key" (change)="getMenu()" placeholder="Nhập tên món ăn" aria-label="Nhập tên món ăn" aria-describedby="button-addon2">
+        <button class="btn btn-primary" type="button" id="button-addon2" (click)="getMenu()">Tìm kiếm</button>
+      </div>
+    </div>
+    <div class="menu-area" >
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Tên món</th>
+            <th>Đơn giá</th>
+            <th>Loại</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of menu">
+          <tr style="align-items: center;">
+            <td>{{item.ten_san_pham}}</td>
+            <td>{{ item.don_gia | currency:'VND':'symbol':'1.0-0' }}</td>
+            <td>{{item.loai}}</td>
+            <td>
+              <button class="btn btn-outline-primary btn-sm" (click)="them(item)">Thêm</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

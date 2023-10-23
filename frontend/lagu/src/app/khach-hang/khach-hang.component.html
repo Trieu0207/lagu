@@ -1,0 +1,155 @@
+<br>
+<div class="container">
+  <div class="head-component">
+    <div class="input-group mb-3 search-bar">
+      <input type="text" class="form-control" [(ngModel)]="this.key" placeholder="Nhập thông tin khách hàng" aria-label="Recipient's username" aria-describedby="button-addon2">
+      <button class="btn btn-outline-primary" (click)="search()" type="button" id="button-addon2">Tìm kiếm</button>
+    </div>
+    <div>
+      <button class="btn btn-outline-success" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Tạo khách hàng mới</button>
+    </div>
+  </div>
+  <div class="collapse create" id="collapseExample">
+    <div class="card card-body">
+      <h1 style="font-weight: bold;">Tạo thông tin khách hàng</h1>
+      <form enctype="multipart/form-data" >
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="sdt" class="form-label">Số điện thoại:</label>
+          <input type="text" class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại" [(ngModel)]="this.new_khachHang.sdt">
+        </div>
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="ho_ten" class="form-label">Họ tên:</label>
+          <input type="text" class="form-control" id="ho_ten" name="ho_ten" placeholder="Nhập họ tên"  [(ngModel)]="this.new_khachHang.ho_ten">
+        </div>
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="dia_chi" class="form-label">Địa chỉ:</label>
+          <input type="text" class="form-control" id="dia_chi" name="dia_chi" placeholder="Nhập địa chỉ"  [(ngModel)]="this.new_khachHang.dia_chi">
+        </div>
+        <button class="btn btn-success" style="margin-right: 1rem;" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">Xác nhận</button>
+        <button class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Hủy</button>
+      </form>
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel2">Lưu thông tin</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h4>Xác nhận xóa khách hàng:</h4>
+              <p>Họ tên: {{this.new_khachHang.ho_ten}}</p>
+              <p>Số điện thoại: {{this.new_khachHang.sdt}}</p>
+              <p>Địa chỉ: {{this.new_khachHang.dia_chi}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" (click)="create()" >Lưu thông tin khách hàng</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="collapse create" id="collapseExample2">
+    <div class="card card-body">
+      <h1 style="font-weight: bold;">Cập nhật thông tin khách hàng</h1>
+      <form enctype="multipart/form-data" >
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="sdt" class="form-label">Số điện thoại:</label>
+          <input type="text" class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại" [(ngModel)]="this.old_khachHang.so_dien_thoai">
+        </div>
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="ho_ten" class="form-label">Họ tên:</label>
+          <input type="text" class="form-control" id="ho_ten" name="ho_ten" placeholder="Nhập họ tên"  [(ngModel)]="this.old_khachHang.ho_ten">
+        </div>
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="dia_chi" class="form-label">Địa chỉ:</label>
+          <input type="text" class="form-control" id="dia_chi" name="dia_chi" placeholder="Nhập địa chỉ"  [(ngModel)]="this.old_khachHang.dia_chi">
+        </div>
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="rank" class="form-label">Rank:</label>
+          <input type="number" class="form-control" id="rank" name="rank" placeholder="Rank"  [(ngModel)]="this.old_khachHang.rank">
+        </div>
+        <button style="margin-right: 1rem;" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Xác nhận thông tin</button>
+        <button class="btn btn-outline-danger" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">Hủy</button>
+      </form>
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel2">Cập nhật thông tin</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h4>Xác nhận xóa khách hàng:</h4>
+              <p>Họ tên: {{this.old_khachHang.ho_ten}}</p>
+              <p>Số điện thoại: {{this.old_khachHang.so_dien_thoai}}</p>
+              <p>Địa chỉ: {{this.old_khachHang.dia_chi}}</p>
+              <p>Rank: {{this.old_khachHang.rank}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" (click)="submitUpdate()" >Xác nhận Thay đổi</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <div class="info-area">
+    <table class="table table-hover ">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Số điện thoại</th>
+          <th>Họ tên</th>
+          <th>Địa chỉ</th>
+          <th>Rank</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of this.dsKhachHang">
+          <td>{{item.id}}</td>
+          <td>{{item.so_dien_thoai}}</td>
+          <td>{{item.ho_ten}}</td>
+          <td>{{item.dia_chi}}</td>
+          <td>{{item.rank}}</td>
+          <td>
+            <button class="btn btn-danger"  style="margin-right: 1rem;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Xóa</button>
+            <button class="btn btn-warning" (click)="update(item)" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">Chi tiết</button>
+          </td>
+          <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Xóa thông tin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <h4>Xác nhận xóa khách hàng: {{item.ho_ten}}</h4>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="delete(item.id)">Xác nhận xóa</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

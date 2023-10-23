@@ -1,0 +1,165 @@
+<br>
+<div class="info">
+  <div class="container-1">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Thông tin đặt bàn</th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr style="align-items: center;">
+          <td>Mã đặt bàn:</td>
+          <td>{{this.ban_info.ma_dat_ban}}</td>
+        </tr>
+        <tr>
+          <td>Thời gian đặt bàn:</td>
+          <td>{{this.ban_info.thoi_gian_dat_ban}}</td>
+        </tr>
+        <tr style="align-items: center;">
+          <td>Số điện thoại: </td>
+          <td>{{this.ban_info.so_dien_thoai}}</td>
+          <td><button  *ngIf="this.ban_info.is_trang_thai == false" type="button" data-bs-toggle="collapse" data-bs-target="#std" class="btn btn-sm btn-outline-primary">Thay đổi</button></td>
+        </tr>
+        <div id="std" class="collapse">
+          <div class="input-group">
+            <input (input)="onInputChange($event)" [(ngModel)] = "this.sdt" type="text" class="form-control" placeholder="Nhập số điện thoại">
+            <button class="btn btn-sm btn-success" type="submit" (click)="updateSdt()">Xác nhận</button>
+          </div>
+        </div>
+        <tr style="align-items: center;">
+          <td>Tên người đặt: </td>
+          <td>{{this.ban_info.ten_nguoi_dat}}</td>
+          <td><button  *ngIf="this.ban_info.is_trang_thai == false" type="button" data-bs-toggle="collapse" data-bs-target="#ten" class="btn btn-sm btn-outline-primary">Thay đổi</button></td>
+        </tr>
+        <div id="ten" class="collapse">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Nhập tên người đặt" [(ngModel)] = "this.ten">
+            <button class="btn btn-sm btn-success" type="submit" (click)="updateTen()" >Xác nhận</button>
+          </div>
+        </div>
+        <tr>
+          <td>Thời gian nhận bàn: </td>
+          <td>{{this.ban_info.thoi_gian_nhan_ban}}</td>
+          <td><button  *ngIf="this.ban_info.is_trang_thai == false" type="button" data-bs-toggle="collapse" data-bs-target="#ngay" class="btn btn-sm btn-outline-primary">Thay đổi</button></td>
+        </tr>
+        <div id="ngay" class="collapse">
+          <div class="input-group">
+            <input type="datetime-local" class="form-control" [(ngModel)] = "this.ngay">
+            <button class="btn btn-sm btn-success" type="submit"(click)="updateTime()">Xác nhận</button>
+          </div>
+        </div>
+        <tr>
+          <td>Số lượng bàn: </td>
+          <td>{{this.ban_info.so_luong_ban}} Bàn</td>
+          <td><button  *ngIf="this.ban_info.is_trang_thai == false" type="button" data-bs-toggle="collapse" data-bs-target="#ban" class="btn btn-sm btn-outline-primary">Thay đổi</button></td>
+        </tr>
+        <div id="ban" class="collapse">
+          <div class="input-group">
+            <input type="number" class="form-control" placeholder="Nhập số lượng bàn" [(ngModel)] = "this.so_luong" value="{{this.so_luong}}">
+            <button class="btn btn-sm btn-success" type="submit" [disabled]="checkChange()" (click)="change_so_luong_ban()">Xác nhận</button>
+          </div>
+        </div>
+        <tr *ngIf="this.ban_info.is_trang_thai == false">
+          <td>Trạng thái:</td>
+          <td>Chưa nhận bàn</td>
+        </tr>
+        <tr *ngIf="this.ban_info.is_trang_thai == true">
+          <td>Trạng thái:</td>
+          <td>Đã nhận bàn</td>
+        </tr>
+        <tr>
+          <td>Tổng tiền cọc:</td>
+          <td>{{this.tong_tien | currency:'VND':'symbol':'1.0-0'}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table *ngIf="this.ds_mon != []" class="table">
+      <thead>
+        <tr>
+          <th>Các món đã order</th>
+          <th><button class="btn btn-sm btn-outline-success" [disabled]="checkTrangThai()" (click)="changeOrder()">Xác nhận menu</button></th>
+        </tr>
+        <tr>
+          <th>Tên món</th>
+          <th>Số lượng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of this.ds_mon">
+          <td>{{item.mon}}</td>
+          <td>
+            <input type="number" [value]="item.so_luong" (input)="inputOrder($event, item)" min="1"/>
+          </td>
+          <td>
+            <button class="btn btn-outline-danger btn-sm" *ngIf="checkTrangThai() == false" [disabled]="checkDel()" (click)="xoa(item)">Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="group-button">
+      <button class="btn btn-warning" style="margin-right: 0.5rem;" (click)="quaylai()">Quay lại</button>
+      <button class="btn btn-primary" style="margin-right: 0.5rem;" [disabled]="checkTrangThai()" (click)="nhanBan()">Nhận bàn</button>
+      <button class="btn btn-danger" style="margin-right: 0.5rem;" [disabled]="checkTrangThai()" data-bs-toggle="modal" data-bs-target="#myModal">Hủy đặt bàn</button>
+
+      <!-- The Modal -->
+      <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Xác nhận hủy đặt bàn</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              Bạn chắc là muốn hủy đặt bàn?
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Thoát</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="huyDatBan()">Hủy đặt bàn</button>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-2"  *ngIf="this.ban_info.is_trang_thai == false">
+    <div class="header-bar">
+      <div class="input-group mb-3 search-bar">
+        <input type="text" class="form-control" [(ngModel)]="key" (change)="getMenu()" placeholder="Nhập tên món ăn" aria-label="Nhập tên món ăn" aria-describedby="button-addon2">
+        <button class="btn btn-primary" type="button" id="button-addon2" (click)="getMenu()">Tìm kiếm</button>
+      </div>
+    </div>
+    <div class="menu-area" >
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Tên món</th>
+            <th>Đơn giá</th>
+            <th>Loại</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of menu">
+          <tr style="align-items: center;">
+            <td>{{item.ten_san_pham}}</td>
+            <td>{{ item.don_gia | currency:'VND':'symbol':'1.0-0' }}</td>
+            <td>{{item.loai}}</td>
+            <td>
+              <button class="btn btn-outline-primary btn-sm" (click)="them(item)">Thêm</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+

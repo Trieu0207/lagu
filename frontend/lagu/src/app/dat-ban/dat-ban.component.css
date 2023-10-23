@@ -1,0 +1,19 @@
+.container{
+  display: flex;
+  margin-top: 1rem;
+}
+.container-1{
+  width: 60%;
+  height: 200px;
+  height: 40vw;
+  overflow: auto;
+}
+.container-2{
+  width: 40%;
+  height: 40vw;
+  overflow: auto;
+  margin-left: 2rem;
+}
+.ban{
+  border: 0.2rem solid black;
+}

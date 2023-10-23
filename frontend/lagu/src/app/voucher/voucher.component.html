@@ -1,0 +1,106 @@
+<br>
+<div class="container">
+
+  <div class="form-group container-1">
+    <h2>Tạo voucher</h2>
+    <form enctype="multipart/form-data">
+      <div class="mb-3 mt-3">
+        <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+        <label for="start_date" class="form-label">Ngày bắt đầu:</label>
+        <input type="datetime-local" class="form-control" id="start_date" name="start_date" [(ngModel)] = "this.time_start">
+      </div>
+
+      <div class="mb-3 mt-3">
+        <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+        <label for="end_date" class="form-label">Ngày kết thúc:</label>
+        <input type="datetime-local" class="form-control" id="end_date" name="end_date" [(ngModel)] = "this.time_end">
+      </div>
+      <div class="mb-3 mt-3">
+        <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+        <label for="so_tien_giam" class="form-label">số tiền giảm:</label>
+        <input type="number" class="form-control" [disabled]="check_tien()" id="so_tien_giam" min="0" name="so_tien_giam" [(ngModel)] = "this.so_tien_giam">
+      </div>
+
+      <div class="mb-3 mt-3">
+        <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+        <label for="phan_tram_giam" class="form-label">Phần trăm giảm:</label>
+        <input type="number" class="form-control" [disabled]="check_phan_tram()" id="phan_tram_giam" name="phan_tram_giam" min="0" [(ngModel)] = "this.phan_tram_giam">
+      </div>
+      <div class="mb-3 mt-3">
+        <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+        <label for="so_luong" class="form-label">Số lượng voucher:</label>
+        <input type="number" class="form-control"  id="so_luong" name="so_luong" min="0" [(ngModel)] = "this.so_luong">
+      </div>
+
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">Tạo Voucher</button>
+    </form>
+  </div>
+  <div class="container-2">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Search" [(ngModel)]="this.key">
+      <button class="btn btn-success" type="submit" (click)="searchVoucher()">Tìm</button>
+    </div>
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Mã voucher</th>
+            <th>trạng thái</th>
+            <th>Số tiền / tỷ lệ giảm</th>
+            <th>Ngày bắt đầu</th>
+            <th>Ngày kết thúc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of this.search_voucher">
+            <td>{{item.ma_giam_gia}}</td>
+            <td>
+              <button *ngIf="item.active === true" class="btn btn-sm btn-primary" (click)="changeActive(item.id)" >{{item.active}}</button>
+              <button *ngIf="item.active === false" class="btn btn-sm btn-warning" (click)="changeActive(item.id)" >{{item.active}}</button>
+            </td>
+            <td >
+              <p *ngIf="item.so_tien_giam !== null">{{item.so_tien_giam | currency:'VND':'symbol':'1.0-0'}}</p>
+              <p *ngIf="item.ty_le_giam !== null">{{(item.ty_le_giam)*100 + '%'}}</p>
+            </td>
+            <td>{{item.ngay_bat_dau}}</td>
+            <td>{{item.ngay_ket_thuc}}</td>
+            <!-- <td><button class="btn btn-sm btn-primary">chi tiết</button></td> -->
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Xác nhận tạo voucher</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <p>Ngày bắt đầu: {{this.time_start}}</p>
+        <p>Ngày bắt đầu: {{this.time_start}}</p>
+        <p *ngIf="this.so_tien_giam !== 0">Số tiền giảm: {{this.so_tien_giam}}</p>
+        <p *ngIf="this.phan_tram_giam !== 0">phần trăm giảm: {{this.phan_tram_giam}}</p>
+        <p *ngIf="this.so_luong !== 0">Số lượng: {{this.so_luong}}</p>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="taoVoucher()" data-bs-dismiss="modal">Tạo Voucher</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+

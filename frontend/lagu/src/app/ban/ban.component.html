@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="container-1">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Mã bàn</th>
+          <th>Số lượng</th>
+          <th>Loại bàn</th>
+          <th>Sức chứa</th>
+          <th>trạng thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of this.dsBan">
+          <td >{{item.id}}</td>
+          <td >{{item.so_luong}}</td>
+          <td >{{item.loai_ban}}</td>
+          <td >{{item.suc_chua}}</td>
+          <td >
+            <span class="badge bg-success" *ngIf="item.is_trang_thai === true">Hoạt động</span>
+            <span class="badge bg-danger" *ngIf="item.is_trang_thai === false">Ngưng hoạt động</span>
+          </td>
+          <td><button class="btn btn-primary" (click)="setBan(item)" > Chỉnh sửa</button></td>
+        </tr>
+
+      </tbody>
+    </table>
+    <br>
+    <div class="addBan">
+      <h2 style="text-align: center;">Thêm bàn mới</h2>
+      <form enctype="multipart/form-data">
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="so_luong" class="form-label">Số lượng:</label>
+          <input type="text" class="form-control" id="so_luong" name="so_luong" [(ngModel)] = "this.new_ban.so_luong">
+        </div>
+
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="suc_chua" class="form-label">Sức chứa:</label>
+          <input type="text"   class="form-control" id="suc_chua" name="suc_chua" [(ngModel)] = "this.new_ban.suc_chua">
+        </div>
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="loai_ban" class="form-label">Loại bàn:</label>
+          <input type="text"  class="form-control" id="loai_ban" name="loai_ban" [(ngModel)] = "this.new_ban.loai_ban">
+        </div>
+        <button  class="btn btn-success" style="margin-right: 0.5rem;" (click)="addBan()">Thêm Bàn</button>
+      </form>
+    </div>
+  </div>
+  <div class="container-2">
+    <div  >
+      <h3 style="text-align: center;">Chỉnh sửa thông tin bàn</h3>
+      <form enctype="multipart/form-data">
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="id" class="form-label">Mã bàn:</label>
+          <input type="text" readonly class="form-control" id="id" name="id" [(ngModel)] = "this.banId">
+        </div>
+
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="so_luong" class="form-label">Số lượng:</label>
+          <input type="text" class="form-control" id="so_luong" name="so_luong" [(ngModel)] = "this.so_luong">
+        </div>
+
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="suc_chua" class="form-label">Sức chứa:</label>
+          <input type="text"   class="form-control" id="suc_chua" name="suc_chua" [(ngModel)] = "this.suc_chua">
+        </div>
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="loai_ban" class="form-label">Loại bàn:</label>
+          <input type="text"  class="form-control" id="loai_ban" name="loai_ban" [(ngModel)] = "this.loai_ban">
+        </div>
+
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="trang_thai" class="form-label">trạng thái:</label>
+          <input type="text" readonly class="form-control" id="trang_thai" name="trang_thai" [(ngModel)] = "this.trang_thai">
+        </div>
+        <button [disabled]="checkClick()" class="btn btn-success" style="margin-right: 0.5rem;" (click)="updateData()">Xác nhận thông tin</button>
+        <button [disabled]="checkClick()" *ngIf="this.trang_thai== true" class="btn btn-warning" (click)="hetBan()">Hết bàn</button>
+        <button [disabled]="checkClick()" *ngIf="this.trang_thai== false" class="btn btn-primary" (click)="hetBan()">Mở bàn</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,36 @@
+<div class="container">
+    <br>
+  <div class="input-group search-bar" style="width: 50%;">
+    <input [(ngModel)]="this.key" type="text" class="form-control" placeholder="Nhập thông tin nhận bàn" aria-label="Nhập tên món ăn" aria-describedby="button-addon2">
+    <button class="btn btn-primary" type="button" id="button-addon2" (click)="search()">Tìm kiếm</button>
+  </div>
+  <br>
+  <table class="table ban">
+    <thead>
+      <tr>
+        <th>Tên người đặt</th>
+        <th>Thời gian nhận bàn</th>
+        <th>Trạng thái</th>
+        <th>Số điện thoại</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of this.dsDatBan">
+      <tr style="align-items: center;">
+        <td>{{item.ten_nguoi_dat}}</td>
+        <td>{{item.thoi_gian_nhan_ban}}</td>
+        <td *ngIf="item.is_trang_thai == true"><span class="badge bg-success">Đã nhận bàn</span></td>
+        <td *ngIf="item.is_trang_thai == false">chưa nhận bàn</td>
+        <td>{{item.so_dien_thoai}}</td>
+        <td style="display: flex;">
+          <input type="button" (click)="get_detail(item)"  class="btn btn-warning btn-md" value="Chi tiết">
+          <input *ngIf="item.is_trang_thai == false" (click)="nhanBan(item.id)" style="margin-left:0.5rem;" type="button" class="btn btn-primary btn-md" value="Nhận bàn">
+          <input *ngIf="item.is_trang_thai == false" (click)="huyDatBan(item.id)" type="button" class="btn btn-outline-danger btn-md" style="margin-left:0.5rem;" value="Hủy đặt bàn">
+
+        </td>
+      </tr>
+    </tbody>
+
+
+  </table>
+</div>

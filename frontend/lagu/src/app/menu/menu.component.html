@@ -1,0 +1,39 @@
+<div class="area-header">
+  <br>
+  <div class="header-component">
+    <div class="search">
+      <div class="input-group mb-3 search-bar">
+        <input type="text" class="form-control" [(ngModel)]="key" (change)="getMenu()" placeholder="Nhập tên món ăn" aria-label="Nhập tên món ăn" aria-describedby="button-addon2">
+        <button class="btn btn-primary" type="button" id="button-addon2" (click)="getMenu()">Tìm kiếm</button>
+      </div>
+      <input style="margin-left: 5rem;" type="button" (click)="routeCreate()" class="btn btn-success" value="Thêm món ăn">
+    </div>
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="margin-left: 0.5rem;">
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked (click)="all()">
+      <label class="btn btn-outline-primary" for="btnradio1" >Tất cả</label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" (click)="mon_an()">
+      <label class="btn btn-outline-primary" for="btnradio2">Món ăn</label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" (click)="thuc_uong()">
+      <label class="btn btn-outline-primary" for="btnradio3">Thức uống</label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" (click)="trang_mieng()">
+      <label class="btn btn-outline-primary" for="btnradio4">Tráng miệng</label>
+    </div>
+  </div>
+
+</div>
+
+<div class="list-card" >
+  <div class="card" style="width: 14rem;" *ngFor="let item of menu">
+    <img src="{{item.link_anh}}"  class="card-img-top" alt="{{item.ten_san_pham}}" loading="lazy">
+    <div class="card-body">
+      <h3 class="card-title">{{item.ten_san_pham}} <span class="badge bg-danger" *ngIf="item.is_trang_thai == false">hết</span></h3>
+      <p class="card-text">Đơn giá: {{ item.don_gia | currency:'VND':'symbol':'1.0-0' }}</p>
+      <a class="btn btn-primary" style="margin: 0.5rem;" (click)="get_detail(item)">Chi tiết</a>
+      <a class="btn btn-danger" *ngIf="item.is_trang_thai == true" (click)="changeTrangThai(item.id)">hết món</a>
+      <a class="btn btn-warning" *ngIf="item.is_trang_thai == false" (click)="changeTrangThai(item.id)">Có món</a>
+    </div>
+  </div>
+</div>

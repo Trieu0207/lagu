@@ -1,0 +1,35 @@
+<h1 style="margin-left:2rem;">Thêm Món Ăn</h1>
+<div class="form-div">
+  <form enctype="multipart/form-data" >
+    <div class="mb-3 mt-3">
+      <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+      <label for="ten" class="form-label">Tên:</label>
+      <input type="text" class="form-control" id="ten" name="ten_san_pham" placeholder="Nhập tên" [(ngModel)] = "this.ten_san_pham">
+    </div>
+
+
+    <div class="mb-3 mt-3">
+      <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+      <label for="donGia" class="form-label">Đơn giá:</label>
+      <input type="number" class="form-control" id="donGia" name="don_gia" placeholder="Nhập Đơn giá" [(ngModel)] = "this.don_gia">
+    </div>
+
+    <div class="mb-3 mt-3">
+      <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+      <label for="anh" class="form-label">Ảnh:</label>
+      <input type="file" class="form-control" name="link_anh" (change)="onFileSelected($event)" accept="image/*">
+    </div>
+
+    <div class="form-check mb-3" style="padding-left: 0;">
+      <label for="dropdown" class="form-label">Chọn loại:</label>
+      <select class="form-select" id="dropdown" name="loai" [(ngModel)] = "this.loai" >
+        <option value="mon_an" selected >Món ăn</option>
+        <option value="mon_nuoc">Thức uống</option>
+        <option value="trang_mieng">Tráng miệng</option>
+      </select>
+    </div>
+    <button  type="submit" class="btn btn-success" (click)="submit()">Submit</button>
+    <button style="margin-left: 1rem;"  type="button" class="btn btn-danger" (click)="thoat()">Thoát</button>
+  </form>
+
+</div>

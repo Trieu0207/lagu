@@ -1,0 +1,17 @@
+.info{
+  display: flex;
+  margin: auto;
+}
+.container-1{
+  width: 60%;
+  height: 200px;
+  height: 40vw;
+  overflow: auto;
+  margin-left: 0.5rem;
+}
+.container-2{
+  width: 40%;
+  height: 40vw;
+  overflow: auto;
+  margin-left: 2rem;
+}

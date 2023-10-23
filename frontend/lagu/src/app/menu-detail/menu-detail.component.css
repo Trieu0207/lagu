@@ -1,0 +1,30 @@
+.menu-detail{
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 2rem;
+  font-size: larger;
+}
+.img-area img{
+  width: 14rem;
+  height: 14rem;
+
+  border-radius: 0.5rem;
+}
+.img-area{
+  background-color: aliceblue;
+  border-radius: 0.5rem;
+  margin-right: 2rem;
+  border: 0.17rem solid #000; /* Định dạng viền với độ dày 2px và màu đen (#000) */
+  padding: 0.5rem; /* Tạo khoảng cách giữa nội dung và viền */
+}
+.button-area button{
+  margin: 0.2rem;
+}
+.form-update{
+  width: 50%;
+  padding-left: 2rem;
+  padding-bottom: 3rem;
+}
+.warning-alert{
+  color: red;
+}

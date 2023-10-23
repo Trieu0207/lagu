@@ -1,0 +1,79 @@
+.head-wed{
+  position:fixed;
+  width: 100%;
+  z-index: 1000;
+}
+.component{
+  padding-top: 5rem;
+  background-color: aqua;
+}
+.lagu-header{
+  height: 4vw;
+}
+.out-logo{
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: rgb(81, 11, 114);
+  border-radius: 0.5rem;
+}
+.logo{
+  color: white;
+  text-align: center;
+  font-weight: bolder;
+  font-size: large;
+  padding-left: 2rem;
+}
+.lagu-container{
+  display: flex;
+  width: 100vw;
+  /* background-color: aqua; */
+}
+.lagu-item{
+  height: auto;
+  /* background-color: blue; */
+}
+/* vùng menu */
+.menu-container{
+  width: 15%;
+  overflow: auto;
+  /* background-color: brown; */
+}
+.menu-container ul {
+  position:fixed;
+  list-style-type: none;
+  padding: 0;
+  width: 15vw;
+  height: 40vw;
+  overflow: auto;
+}
+
+.menu-container ul li{
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+  line-height: 4rem;
+  width: 100%;
+}
+.menu-container ul li:hover{
+  background-color: whitesmoke;
+  transition: background-color 0.3s;
+}
+.menu-container ul li:hover a{
+  color: brown;
+}
+.menu-container ul li a {
+  text-decoration: none;
+  color: black;
+}
+.menu-container ul li a:hover{
+
+}
+
+/* vùng component */
+.component-container{
+  width: 85%;
+  /* background-color: rgb(245, 174, 123); */
+}
+/* .suport-container{
+  width: 20%;
+} */
+

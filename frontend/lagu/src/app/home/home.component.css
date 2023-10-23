@@ -1,0 +1,37 @@
+.container{
+  display: flex;
+  margin-top: 1rem;
+}
+.container-1{
+  width: 50%;
+  height: 200px;
+}
+.container-2{
+  width: 50%;
+  height: 40vw;
+  overflow: auto;
+  margin-left: 2rem;
+}
+.item{
+  display: flex;
+}
+.item p{
+  padding-right: 0.5rem
+}
+.search-bar{
+  /* position:fixed; */
+  position: fixed;
+  width: 40vw;
+  /* top: 0;
+  left: 0; */
+}
+.menu-area{
+  margin-top: 3rem;
+}
+.input-td{
+  width: 2rem;
+  margin-right: 1rem;
+}
+.form-data{
+  margin-bottom: 2rem;
+}

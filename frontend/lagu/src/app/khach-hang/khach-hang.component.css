@@ -1,0 +1,19 @@
+.container{
+  margin: 1rem;
+}
+.search-bar{
+  max-width: 50%;
+  margin-right: 2rem;
+}
+.head-component{
+  display: flex;
+  flex-wrap: wrap;
+}
+.info-area{
+  width: 90%;
+  height: 30vw;
+  overflow: auto;
+}
+.create{
+  width: 80%;
+}

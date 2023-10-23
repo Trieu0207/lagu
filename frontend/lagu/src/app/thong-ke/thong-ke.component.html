@@ -1,0 +1,23 @@
+<br>
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Thống kê doanh thu theo năm</th>
+      </tr>
+      <tr>
+        <th>tháng</th>
+        <th>Số lượng Bill</th>
+        <th>Doanh thu</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of this.thongKeDoanhThu">
+        <td>{{item.thang}}</td>
+        <td>{{item.so_luong}}</td>
+        <td>{{item.doanh_thu | currency:'VND':'symbol':'1.0-0'}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

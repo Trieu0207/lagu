@@ -1,0 +1,116 @@
+<div class='container' >
+  <div class="container-1">
+    <div class="form-data">
+      <form enctype="multipart/form-data" >
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="ten" class="form-label">Số điện thoại (thành viên):</label>
+          <input type="text" class="form-control" id="ten" name="ten_san_pham" placeholder="Nhập số điện thoại" [(ngModel)] = "this.so_dien_thoai">
+        </div>
+
+
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="voucher" class="form-label">Mã giảm giá:</label>
+          <input type="text" class="form-control" id="voucher" name="voucher" placeholder="Nhập mã giảm giá" [(ngModel)] = "this.voucher">
+
+        </div>
+        <div class="mb-3 mt-3">
+          <!-- <p class="warning-alert" *ngIf="checkNull(this.ten_san_pham) == false"> Thông tin không được bỏ trống</p> -->
+          <label for="count" class="form-label" >Tổng thanh toán: {{ this.tong_tien | currency:'VND':'symbol':'1.0-0' }}</label>
+          <input type="number" readonly class="form-control" id="count" name="count" value="0" [(ngModel)] = "this.tong_tien">
+        </div>
+        <button  type="submit" (click)="submit()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">Submit</button>
+        <button style="margin-left: 2rem;" class="btn btn-warning" (click)="check_code(this.voucher)"> check voucher</button>
+      </form>
+
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Thông báo từ phía Server</h4>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body" *ngIf="this.alert != null">
+            {{this.alert}}
+          </div>
+          <div class="modal-body" *ngIf="this.alert == null">
+            <p>Số tiền thanh toán: {{ this.tong_tien | currency:'VND':'symbol':'1.0-0' }}</p>
+            <input type="number" id="thanh_toan" name="thanh_toan" placeholder="Tiền khách đưa" (input)="tien($event)">
+            <br>
+            <h3>Tiền thối: {{this.tien_thoi | currency:'VND':'symbol':'1.0-0' }}</h3>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="xacNhan()">Xác nhận</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="this.bill_menu != []">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Tên món</th>
+            <th>Đơn giá</th>
+            <th>Số lượng</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of bill_menu">
+          <tr style="align-items: center;">
+            <td>{{item.ten_san_pham}}</td>
+            <td><p>{{ item.don_gia | currency:'VND':'symbol':'1.0-0' }}</p></td>
+            <td>
+              <input type="number" (input)="change($event, item)" [value]="item.so_luong" min="1"/>
+            </td>
+            <td>
+              <button class="btn btn-outline-danger btn-sm" (click)="xoa(item)">Xóa</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="container-2">
+    <div class="header-bar">
+      <div class="input-group mb-3 search-bar">
+        <input type="text" class="form-control" [(ngModel)]="key" (change)="getMenu()" placeholder="Nhập tên món ăn" aria-label="Nhập tên món ăn" aria-describedby="button-addon2">
+        <button class="btn btn-primary" type="button" id="button-addon2" (click)="getMenu()">Tìm kiếm</button>
+      </div>
+    </div>
+    <div class="menu-area" >
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Tên món</th>
+            <th>Đơn giá</th>
+            <th>Loại</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of menu">
+          <tr style="align-items: center;">
+            <td>{{item.ten_san_pham}}</td>
+            <td>{{ item.don_gia | currency:'VND':'symbol':'1.0-0' }}</td>
+            <td>{{item.loai}}</td>
+            <td>
+              <button class="btn btn-outline-primary btn-sm" (click)="them(item)">Thêm</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,34 @@
+
+<div  class="lagu-header">
+  <nav class="navbar navbar-expand-sm bg-light navbar-light head-wed">
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <li class="out-logo nav-item">
+          <a class='logo nav-link '> lagu</a>
+        </li>
+       <li class="nav-item">
+          <a class="nav-link" href="#">Thông tin nhân viên</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Kết nối</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+<div class="lagu-container">
+  <div class="menu-container lagu-item">
+    <ul>
+      <li *ngFor="let menuItem of menuItems" (click)="handleItemClick(menuItem.link)">
+        <a [routerLink]="menuItem.link">{{ menuItem.label }}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="component-container lagu-item">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- <div class="suport-container lagu-item"></div> -->
+</div>
+

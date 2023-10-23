@@ -1,0 +1,58 @@
+.list-card{
+  display: flex;
+  flex-wrap: wrap; /* Cho phép các card tự động xuống dòng khi không đủ không gian */
+  box-sizing: border-box;
+  margin: 1rem 1rem;
+}
+/* .area-header{
+  height: 9vw;
+  background-color: white;
+}
+.header-component{
+  position:fixed;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+
+} */
+.layer {
+  position: relative;
+  display: inline-block;
+}
+.search{
+  display: flex;
+}
+.search input {
+  height: 3rem;
+
+}
+.layer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Màu đen với độ trong suốt 50% */
+  z-index: 1; /* Đặt lớp nền trên thẻ img */
+  pointer-events: none; /* Ngăn lớp nền chặn các sự kiện chuột */
+}
+.card{
+  margin: 0.5rem 0.5rem;
+}
+.card-img-top{
+  height: 11rem;
+  width: auto;
+}
+.search{
+  display: flex;
+  flex-wrap: wrap;
+}
+.search-bar{
+  margin-left: 0.5rem;
+  width: 50%;
+}
+
+.search-option a{
+  height: auto;
+}
